@@ -4,72 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO & Core Metadata -->
-    <title>MindMeld - The Two-Player Word Association Game</title>
-    <meta name="description" content="The two-player game of word association. Can you and your partner guess the same word to achieve a MindMeld? Play for free online!">
-    <meta name="keywords" content="mindmeld, word association game, two player game, party game, online game">
-    <!-- TODO: Replace with your final domain name -->
-    <link rel="canonical" href="https://mindmeld.lol">
-
-    <!-- Standard Favicon (for browser tabs) -->
+    <!-- SEO & Social Sharing Meta Tags -->
+    <title>MindMeld - The Game of Word Association</title>
+    <meta name="description" content="MindMeld is a fun two-player game where you try to guess the same word as your partner. A great party game for friends!">
+    <meta name="keywords" content="MindMeld, word game, party game, two player game, word association">
+    
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text x='50' y='50' font-size='70' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'>M</text></svg>">
     
-    <!-- Meta Tags for Social Sharing (Open Graph for Facebook, iMessage, etc.) -->
-    <meta property="og:title" content="MindMeld - A Game of Word Association">
-    <meta property="og:description" content="Can you and your partner guess the same word to win?">
-    <meta property="og:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=MindMeld&font=sans">
-    <!-- TODO: Replace with your final domain name -->
-    <meta property="og:url" content="https://your-domain-name.com">
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="MindMeld - The Game of Word Association">
+    <meta property="og:description" content="Can you get on the same wavelength as your partner? Try to guess the same word at the same time!">
+    <meta property="og:image" content="https://your-domain.com/social-preview.png">
 
-    <!-- Meta Tags for Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MindMeld - A Game of Word Association">
-    <meta name="twitter:description" content="Can you and your partner guess the same word to win?">
-    <meta name="twitter:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=MindMeld&font=sans">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-domain.com/">
+    <meta property="twitter:title" content="MindMeld - The Game of Word Association">
+    <meta property="twitter:description" content="Can you get on the same wavelength as your partner? Try to guess the same word at the same time!">
+    <meta property="twitter:image" content="https://your-domain.com/social-preview.png">
 
+    <!-- Styles and Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 sm:p-6">
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 overflow-hidden">
 
     <!-- Main Card -->
-    <div class="w-full max-w-sm sm:max-w-md text-center p-6 sm:p-8 bg-white rounded-2xl shadow-lg border border-gray-200/50">
+    <div class="w-full max-w-xl text-center p-6 sm:p-8 bg-white rounded-2xl shadow-lg border-2 border-indigo-100 relative">
+
+        <!-- How to Play Button -->
+        <button id="how-to-play-btn" class="absolute top-4 right-4 text-gray-400 hover:text-indigo-600 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </button>
 
         <!-- Home Screen -->
         <div id="home-screen">
-            <h1 class="title-font text-6xl sm:text-7xl font-bold mb-2 text-indigo-600">MindMeld</h1>
+            <h1 class="title-font text-5xl sm:text-7xl font-bold mb-2 text-indigo-600">MindMeld</h1>
             <p class="text-gray-500 mb-6 sm:mb-8">The two-player game of word association.</p>
             
-            <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-gray-200 mb-3 sm:mb-4">
-                <input type="text" id="player-name-input" placeholder="Enter Your Name" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
-            </div>
-
-            <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-gray-200">
-                <button id="create-game-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Create New Game</button>
-                <div class="flex items-center my-3 sm:my-4">
-                    <div class="flex-grow h-px bg-gray-200"></div>
-                    <span class="px-4 text-sm text-gray-400 font-medium">OR</span>
-                    <div class="flex-grow h-px bg-gray-200"></div>
+            <div class="space-y-4">
+                <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-indigo-100">
+                    <input type="text" id="player-name-input" placeholder="Enter Your Name" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
                 </div>
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="join-game-id-input" placeholder="Enter Game Code" class="w-full sm:flex-grow px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
-                    <button id="join-game-btn" class="w-full sm:w-auto border-2 border-indigo-500 text-indigo-600 font-bold py-3 px-6 rounded-lg hover:bg-indigo-50 hover:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Join</button>
+                <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-indigo-100">
+                    <button id="create-game-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Create New Game</button>
+                    <div class="flex items-center my-4">
+                        <div class="flex-grow h-px bg-gray-200"></div>
+                        <span class="px-4 text-sm text-gray-400 font-medium">OR</span>
+                        <div class="flex-grow h-px bg-gray-200"></div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="join-game-id-input" placeholder="Enter Game Code" class="w-full sm:flex-grow px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
+                        <button id="join-game-btn" class="w-full sm:w-auto border-2 border-indigo-500 text-indigo-600 font-bold py-3 px-6 rounded-lg hover:bg-indigo-50 hover:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Join</button>
+                    </div>
                 </div>
             </div>
-            <p id="home-error" class="text-red-500 mt-2 sm:mt-3 h-4 text-sm"></p>
+            <p id="home-error" class="text-red-500 mt-4 h-4 text-sm"></p>
         </div>
 
         <!-- Invite Screen -->
         <div id="invite-screen" class="hidden">
-            <h1 class="title-font text-5xl sm:text-6xl font-bold mb-2 text-indigo-600">Join Game</h1>
-            <p id="inviter-name-display" class="text-gray-600 text-lg mb-3 sm:mb-4"></p>
-            <p class="text-gray-500 mb-4 sm:mb-6">Game Code: <span id="invite-game-code" class="font-bold text-indigo-600"></span></p>
-            <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-gray-200">
-                <input type="text" id="invite-name-input" placeholder="Enter Your Name to Join" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition mb-3 sm:mb-4" autocomplete="off">
-                <button id="invite-join-btn" class="w-full bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all transform hover:-translate-y-0.5 shadow-md">Join Game</button>
-            </div>
+            <h2 id="inviter-name-display" class="text-2xl font-bold text-gray-800 mb-2">You're Invited!</h2>
+            <p class="text-gray-500 mb-4">Joining game code: <span id="invite-game-code" class="font-bold text-indigo-600"></span></p>
+            <input type="text" id="invite-name-input" placeholder="Enter Your Name to Join" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition mb-4" autocomplete="off">
+            <button id="invite-join-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Let's Go!</button>
         </div>
 
         <!-- Game Screen (Container) -->
@@ -77,29 +81,24 @@
             <!-- Lobby -->
             <div id="lobby" class="hidden">
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">Game Lobby</h2>
-                <p class="text-gray-500 mb-4">Share this link with your partner:</p>
+                <p class="text-gray-500 mb-4">Share this code with your partner:</p>
                 <div id="game-id-container" class="bg-indigo-50 p-4 rounded-lg cursor-pointer border-2 border-dashed border-indigo-200 hover:border-indigo-400 transition-all" title="Click to copy">
                     <span id="game-id-display" class="text-2xl sm:text-3xl font-bold tracking-widest text-indigo-700"></span>
                 </div>
-                 <div class="flex justify-center items-center mt-3 text-gray-500">
-                    <span id="lobby-status" class="waiting-text-animation">Waiting for Player 2 to join...</span>
-                </div>
+                <p id="lobby-status" class="mt-4 text-gray-500">Waiting for Player 2 to join...</p>
             </div>
-
             <!-- Game Board -->
             <div id="game-board" class="hidden">
                  <p class="text-xl text-gray-500 mb-4 sm:mb-6">Round <span id="round-display" class="font-bold text-indigo-700">1</span></p>
-                <div class="flex justify-center items-center mb-6 sm:mb-8 h-8">
-                    <h2 id="board-status" class="text-lg font-medium text-gray-600"></h2>
-                </div>
-                 <div class="flex flex-col sm:flex-row justify-around items-center sm:items-start mb-12 gap-4">
+                <h2 id="board-status" class="text-lg font-medium text-gray-600 mb-4 sm:mb-6 h-7">Players are thinking...</h2>
+                 <div class="flex flex-col sm:flex-row justify-around items-center sm:items-start mb-8 sm:mb-12 gap-4 sm:gap-6">
                     <div class="text-center w-full sm:w-1/2">
                          <p id="player1-name-display" class="mb-2 font-bold text-gray-800 truncate">Player 1</p>
-                        <div id="word1-display" class="h-20 bg-indigo-50 border-2 border-dashed border-indigo-200 rounded-lg flex items-center justify-center text-xl font-semibold text-indigo-800 break-words p-2">???</div>
+                        <div id="word1-display" class="h-20 bg-indigo-50 border-2 border-dashed border-indigo-200/80 rounded-lg flex items-center justify-center text-xl font-semibold text-indigo-800 break-words p-2">???</div>
                     </div>
-                     <div class="text-center w-full sm:w-1/2">
+                     <div class="text-center w-full sm:w-1/2 mt-4 sm:mt-0">
                          <p id="player2-name-display" class="mb-2 font-bold text-gray-800 truncate">Player 2</p>
-                        <div id="word2-display" class="h-20 bg-indigo-50 border-2 border-dashed border-indigo-200 rounded-lg flex items-center justify-center text-xl font-semibold text-indigo-800 break-words p-2">???</div>
+                        <div id="word2-display" class="h-20 bg-indigo-50 border-2 border-dashed border-indigo-200/80 rounded-lg flex items-center justify-center text-xl font-semibold text-indigo-800 break-words p-2">???</div>
                     </div>
                 </div>
                 <div id="submit-area">
@@ -110,22 +109,55 @@
                     <p id="input-feedback" class="text-gray-500 mt-2 h-5 text-sm">Enter your word for this round.</p>
                 </div>
             </div>
-
             <!-- Game Over Screen -->
             <div id="game-over-screen" class="hidden">
-                <h2 id="game-over-title" class="title-font text-5xl sm:text-6xl font-bold mb-2 text-teal-500 animate-tada">MindMeld!</h2>
-                <p id="winner-names" class="text-gray-600 font-bold text-lg"></p>
-                <p id="game-over-message" class="text-gray-500 text-base mb-8"></p>
+                <h2 id="game-over-title" class="title-font text-5xl font-bold mb-2 text-teal-500 animate-tada">MindMeld!</h2>
+                <p id="winner-names" class="text-lg font-bold text-gray-800"></p>
+                <p id="game-over-message" class="text-gray-600 mt-2 mb-8">You both guessed 'word'!</p>
                 <button id="play-again-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Play Again</button>
             </div>
-             <!-- Word History -->
-            <div id="word-history-container" class="mt-4 sm:mt-8 hidden">
+             <!-- Word History Container -->
+            <div id="word-history-container" class="mt-8 hidden">
                 <h3 class="font-bold text-center text-gray-700 mb-2">Round History</h3>
                 <div id="word-history" class="space-y-2 max-h-40 overflow-y-auto pr-2">
+                    <!-- History will be populated here -->
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- How to Play Modal -->
+    <div id="rules-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden transition-opacity duration-300">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-left relative transform transition-transform duration-300">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-indigo-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold text-indigo-600 mb-6 text-center">How to Play</h2>
+            <div class="space-y-6 text-gray-600">
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-1">The Goal:</h3>
+                    <p>It's simple: guess the same word as your partner at the same time!</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-1">How It Works:</h3>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Both players <i>secretly</i> enter a word.</li>
+                        <li>The words are revealed. If they match? you win!</li>
+                        <li>If not, don't worry! Use those words to try and think of a new word.</li>
+                        <li>Keep going, until...&nbsp;&nbsp;<span class="title-font text-2xl font-bold text-teal-500 animate-tada inline-block">MindMeld!</span></li>
+                    </ol>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-800 mb-1">Example:</h3>
+                    <p>If one player said <span class="font-semibold text-indigo-500">"sand"</span> and the other said <span class="font-semibold text-indigo-500">"water,"</span> you might both try <span class="font-semibold text-indigo-500">"beach"</span> in the next round to find the middle ground!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Script -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>

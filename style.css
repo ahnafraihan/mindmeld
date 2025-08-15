@@ -59,3 +59,13 @@ body {
     100% { background-position: -200% 0; }
 }
 
+/* Modal Styles */
+#rules-modal.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#rules-modal.visible > div {
+    transform: scale(1);
+}
+

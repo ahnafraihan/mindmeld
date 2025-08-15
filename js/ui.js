@@ -1,4 +1,4 @@
-let UIElements = {};
+export let UIElements = {};
 
 export function initUI() {
     UIElements = {
@@ -9,6 +9,11 @@ export function initUI() {
         gameBoard: document.getElementById('game-board'),
         gameOverScreen: document.getElementById('game-over-screen'),
         wordHistoryContainer: document.getElementById('word-history-container'),
+
+        // How to Play Modal
+        howToPlayBtn: document.getElementById('how-to-play-btn'),
+        rulesModal: document.getElementById('rules-modal'),
+        closeModalBtn: document.getElementById('close-modal-btn'),
 
         playerNameInput: document.getElementById('player-name-input'),
         createGameBtn: document.getElementById('create-game-btn'),
@@ -44,10 +49,9 @@ export function initUI() {
     };
 }
 
-export { UIElements };
-
 export function showScreen(screenId) {
-    const screens = ['home-screen', 'game-screen', 'invite-screen', 'lobby', 'game-board', 'gameOverScreen'];
+    // Corrected 'gameOverScreen' to 'game-over-screen' to match the HTML ID
+    const screens = ['home-screen', 'game-screen', 'invite-screen', 'lobby', 'game-board', 'game-over-screen'];
     screens.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.add('hidden');
@@ -73,4 +77,3 @@ export function resetUI() {
     if (UIElements.joinGameBtn) UIElements.joinGameBtn.disabled = false;
     if (UIElements.wordInput) UIElements.wordInput.value = '';
 }
-

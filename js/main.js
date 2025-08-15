@@ -1,6 +1,5 @@
 import { initializeFirebase, authenticateUser } from './firebase.js';
-// Correctly import requestRematch and remove the unused resetGame import from here
-import { createGame, joinGame, submitWord, requestRematch } from './game.js';
+import { createGame, joinGame, submitWord, requestRematch, resetGame } from './game.js';
 import { UIElements, showScreen, initUI } from './ui.js';
 
 let gameIdFromUrl = null;
@@ -10,32 +9,30 @@ function setupEventListeners() {
     
     UIElements.joinGameBtn.addEventListener('click', () => {
         const gameId = UIElements.joinGameIdInput.value.trim().toUpperCase();
+        if (!UIElements.playerNameInput.value.trim()) {
+            UIElements.homeError.textContent = "Please enter your name first!";
+            return;
+        }
         if (!gameId) {
             UIElements.homeError.textContent = "Please enter a Game ID.";
             return;
         }
-        if (!UIElements.playerNameInput.value.trim()) {
-            gameIdFromUrl = gameId;
-            showScreen('invite-screen');
-            UIElements.inviteGameCode.textContent = gameId;
-            UIElements.inviterNameDisplay.textContent = "You've been invited to play MindMeld!";
-            UIElements.inviteNameInput.focus();
-        } else {
-            joinGame(gameId, UIElements.playerNameInput.value);
-        }
+        joinGame(gameId, UIElements.playerNameInput.value);
     });
 
     UIElements.inviteJoinBtn.addEventListener('click', () => {
         if (gameIdFromUrl) {
-            const playerName = UIElements.inviteNameInput.value;
+            const playerName = UIElements.inviteNameInput.value.trim();
+            if (!playerName) {
+                // This could be a small alert or text change in the UI
+                alert("Please enter your name!");
+                return;
+            }
             joinGame(gameIdFromUrl, playerName);
         }
     });
 
     UIElements.submitWordBtn.addEventListener('click', submitWord);
-    
-    // --- THIS IS THE FIX ---
-    // The Play Again button now correctly calls requestRematch
     UIElements.playAgainBtn.addEventListener('click', requestRematch);
 
     UIElements.gameIdContainer.addEventListener('click', () => {
@@ -65,6 +62,22 @@ function setupEventListeners() {
             UIElements.submitWordBtn.click();
         }
     });
+
+    // How to Play Modal Listeners
+    UIElements.howToPlayBtn.addEventListener('click', () => {
+        UIElements.rulesModal.classList.remove('hidden');
+    });
+
+    UIElements.closeModalBtn.addEventListener('click', () => {
+        UIElements.rulesModal.classList.add('hidden');
+    });
+
+    // This is the new logic to close the modal by clicking the background
+    UIElements.rulesModal.addEventListener('click', (event) => {
+        if (event.target === UIElements.rulesModal) {
+            UIElements.rulesModal.classList.add('hidden');
+        }
+    });
 }
 
 function handleUrlGameInvite() {
@@ -85,6 +98,8 @@ function handleUrlGameInvite() {
         
         UIElements.inviteNameInput.focus();
         window.history.replaceState({}, document.title, window.location.pathname);
+    } else {
+        showScreen('home-screen');
     }
 }
 
@@ -98,3 +113,4 @@ function init() {
 }
 
 window.addEventListener('load', init);
+
