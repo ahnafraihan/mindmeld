@@ -25,6 +25,10 @@ export async function createGame(playerName) {
         UIElements.homeError.textContent = "Authenticating... Please wait a moment.";
         return;
     }
+    if (!playerName) {
+        UIElements.homeError.textContent = "Please enter your name first!";
+        return;
+    }
 
     UIElements.createGameBtn.disabled = true;
     UIElements.homeError.textContent = '';
@@ -62,8 +66,10 @@ export async function joinGame(gameId, playerName) {
         UIElements.homeError.textContent = "Authenticating... Please wait a moment.";
         return;
     }
-    
-    const finalPlayerName = playerName.trim();
+    if (!playerName) {
+        UIElements.homeError.textContent = "Please enter your name first!";
+        return;
+    }
     
     if(UIElements.joinGameBtn) UIElements.joinGameBtn.disabled = true;
     if (UIElements.inviteJoinBtn) UIElements.inviteJoinBtn.disabled = true;
@@ -86,7 +92,7 @@ export async function joinGame(gameId, playerName) {
         if (!gameData.playerIds.includes(currentUserId)) {
              await updateDoc(gameRef, {
                 status: 'playing',
-                [`players.${currentUserId}`]: { name: finalPlayerName, lastWord: null, playerNum: 2, wantsRematch: false },
+                [`players.${currentUserId}`]: { name: playerName, lastWord: null, playerNum: 2, wantsRematch: false },
                 playerIds: [...gameData.playerIds, currentUserId]
             });
         }
@@ -263,8 +269,10 @@ function updateUIWithGameState(gameData) {
             UIElements.wordInput.value = '';
         }
 
-        UIElements.boardStatus.className = "text-base text-gray-500 mb-10";
-        UIElements.boardStatus.classList.remove('waiting-text-animation');
+        // --- THIS IS THE FIX ---
+        // Reset styles first, then add conditional ones
+        UIElements.boardStatus.classList.remove('font-bold', 'text-teal-500', 'text-red-500', 'waiting-text-animation');
+        UIElements.boardStatus.classList.add('font-medium', 'text-gray-500');
 
         if (bothSubmitted) {
             UIElements.word1Display.textContent = gameData.players[gameData.playerIds[0]].lastWord;
@@ -273,7 +281,8 @@ function updateUIWithGameState(gameData) {
 
             if (match) {
                 UIElements.boardStatus.textContent = "Meld!";
-                UIElements.boardStatus.className = `font-bold text-xl text-teal-500 mb-10`;
+                UIElements.boardStatus.classList.remove('font-medium', 'text-gray-500');
+                UIElements.boardStatus.classList.add('font-bold', 'text-teal-500');
             } else {
                 UIElements.boardStatus.textContent = "Not a match! Try again.";
                 UIElements.word1Display.classList.add('shake');
@@ -288,7 +297,7 @@ function updateUIWithGameState(gameData) {
             UIElements.boardStatus.textContent = `${opponent.name} is ready!`;
         } else {
              UIElements.boardStatus.textContent = iHaveSubmitted ? `Waiting for ${opponent.name}...` : 'Players are thinking...';
-             UIElements.boardStatus.classList.add('waiting-text-animation');
+             UIElements.board-status.classList.add('waiting-text-animation');
         }
 
      } else if (gameData.status === 'gameover') {
