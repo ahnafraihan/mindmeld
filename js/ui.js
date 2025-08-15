@@ -28,6 +28,7 @@ export function initUI() {
 
         gameIdDisplay: document.getElementById('game-id-display'),
         gameIdContainer: document.getElementById('game-id-container'),
+        shareGameBtn: document.getElementById('share-game-btn'), // New share button
 
         lobbyStatus: document.getElementById('lobby-status'),
         boardStatus: document.getElementById('board-status'),
@@ -50,7 +51,6 @@ export function initUI() {
 }
 
 export function showScreen(screenId) {
-    // Corrected 'gameOverScreen' to 'game-over-screen' to match the HTML ID
     const screens = ['home-screen', 'game-screen', 'invite-screen', 'lobby', 'game-board', 'game-over-screen'];
     screens.forEach(id => {
         const el = document.getElementById(id);
@@ -77,3 +77,4 @@ export function resetUI() {
     if (UIElements.joinGameBtn) UIElements.joinGameBtn.disabled = false;
     if (UIElements.wordInput) UIElements.wordInput.value = '';
 }
+

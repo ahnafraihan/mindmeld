@@ -24,7 +24,6 @@ function setupEventListeners() {
         if (gameIdFromUrl) {
             const playerName = UIElements.inviteNameInput.value.trim();
             if (!playerName) {
-                // This could be a small alert or text change in the UI
                 alert("Please enter your name!");
                 return;
             }
@@ -39,14 +38,7 @@ function setupEventListeners() {
         const gameId = UIElements.gameIdDisplay.textContent;
         if (!gameId) return;
         
-        const creatorName = UIElements.playerNameInput.value.trim();
-        let inviteLink = `${window.location.origin}${window.location.pathname}?game=${gameId}`;
-        
-        if (creatorName) {
-            inviteLink += `&invitedBy=${encodeURIComponent(creatorName)}`;
-        }
-        
-        navigator.clipboard.writeText(inviteLink).then(() => {
+        navigator.clipboard.writeText(gameId).then(() => {
             UIElements.gameIdContainer.classList.add('copied');
             setTimeout(() => {
                 UIElements.gameIdContainer.classList.remove('copied');
@@ -54,6 +46,36 @@ function setupEventListeners() {
         }).catch(err => {
             console.error('Failed to copy: ', err);
         });
+    });
+
+    UIElements.shareGameBtn.addEventListener('click', () => {
+        const gameId = UIElements.gameIdDisplay.textContent;
+        const creatorName = UIElements.playerNameInput.value.trim();
+        if (!gameId) return;
+
+        let inviteLink = `${window.location.origin}${window.location.pathname}?game=${gameId}`;
+        if (creatorName) {
+            inviteLink += `&invitedBy=${encodeURIComponent(creatorName)}`;
+        }
+
+        const shareData = {
+            title: 'MindMeld Game Invite',
+            text: `${creatorName || 'A friend'} has invited you to play MindMeld!`,
+            url: inviteLink,
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData).catch((err) => console.error('Error sharing:', err));
+        } else {
+            navigator.clipboard.writeText(inviteLink).then(() => {
+                UIElements.gameIdContainer.classList.add('copied');
+                setTimeout(() => {
+                    UIElements.gameIdContainer.classList.remove('copied');
+                }, 500);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
     });
     
     UIElements.wordInput.addEventListener('keyup', (event) => {
@@ -63,7 +85,6 @@ function setupEventListeners() {
         }
     });
 
-    // How to Play Modal Listeners
     UIElements.howToPlayBtn.addEventListener('click', () => {
         UIElements.rulesModal.classList.remove('hidden');
     });
@@ -72,7 +93,6 @@ function setupEventListeners() {
         UIElements.rulesModal.classList.add('hidden');
     });
 
-    // This is the new logic to close the modal by clicking the background
     UIElements.rulesModal.addEventListener('click', (event) => {
         if (event.target === UIElements.rulesModal) {
             UIElements.rulesModal.classList.add('hidden');
