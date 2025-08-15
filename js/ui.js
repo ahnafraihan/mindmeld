@@ -1,5 +1,6 @@
 export let UIElements = {};
 
+// This function now runs after the DOM is loaded, preventing race conditions.
 export function initUI() {
     UIElements = {
         homeScreen: document.getElementById('home-screen'),
@@ -10,7 +11,6 @@ export function initUI() {
         gameOverScreen: document.getElementById('game-over-screen'),
         wordHistoryContainer: document.getElementById('word-history-container'),
 
-        // How to Play Modal
         howToPlayBtn: document.getElementById('how-to-play-btn'),
         rulesModal: document.getElementById('rules-modal'),
         closeModalBtn: document.getElementById('close-modal-btn'),
@@ -24,11 +24,12 @@ export function initUI() {
         inviteNameInput: document.getElementById('invite-name-input'),
         inviteGameCode: document.getElementById('invite-game-code'),
         inviteJoinBtn: document.getElementById('invite-join-btn'),
+        inviteError: document.getElementById('invite-error'),
         inviterNameDisplay: document.getElementById('inviter-name-display'),
 
         gameIdDisplay: document.getElementById('game-id-display'),
         gameIdContainer: document.getElementById('game-id-container'),
-        shareGameBtn: document.getElementById('share-game-btn'), // New share button
+        shareGameBtn: document.getElementById('share-game-btn'),
 
         lobbyStatus: document.getElementById('lobby-status'),
         boardStatus: document.getElementById('board-status'),
@@ -49,6 +50,7 @@ export function initUI() {
         playAgainBtn: document.getElementById('play-again-btn'),
     };
 }
+
 
 export function showScreen(screenId) {
     const screens = ['home-screen', 'game-screen', 'invite-screen', 'lobby', 'game-board', 'game-over-screen'];
@@ -77,4 +79,3 @@ export function resetUI() {
     if (UIElements.joinGameBtn) UIElements.joinGameBtn.disabled = false;
     if (UIElements.wordInput) UIElements.wordInput.value = '';
 }
-

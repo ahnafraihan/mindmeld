@@ -6,6 +6,15 @@ body {
 
 .title-font {
     font-family: 'Baloo 2', cursive;
+    /* Hide the title by default */
+    opacity: 0;
+    /* Add a smooth transition for the fade-in effect */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* This class will be added by JavaScript once the font is loaded */
+body.fonts-loaded .title-font {
+    opacity: 1;
 }
 
 #game-id-container.copied {
@@ -54,3 +63,4 @@ body {
         background-position: 200% center;
     }
 }
+

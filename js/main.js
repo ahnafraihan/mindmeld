@@ -16,23 +16,14 @@ function setupEventListeners() {
     
     UIElements.joinGameBtn.addEventListener('click', () => {
         const gameId = UIElements.joinGameIdInput.value.trim().toUpperCase();
-        const playerName = UIElements.playerNameInput.value.trim();
-
-        if (!gameId) {
-            UIElements.homeError.textContent = "Please enter a Game ID.";
-            return;
-        }
-
-        // If the player has entered a name, join directly.
-        if (playerName) {
-            joinGame(gameId, playerName);
-        } else {
-            // If no name, take them to the invite screen to enter one.
+        if (!UIElements.playerNameInput.value.trim()) {
             gameIdFromUrl = gameId;
             showScreen('invite-screen');
             UIElements.inviteGameCode.textContent = gameId;
-            UIElements.inviterNameDisplay.textContent = "Enter your name to join the game!";
+            UIElements.inviterNameDisplay.textContent = "You've been invited to play MindMeld!";
             UIElements.inviteNameInput.focus();
+        } else {
+            joinGame(gameId, UIElements.playerNameInput.value);
         }
     });
 
@@ -139,13 +130,20 @@ function handleUrlGameInvite() {
     }
 }
 
+// This new function waits for the font to load, then makes the title visible.
+async function loadFonts() {
+    await document.fonts.load('700 1em "Baloo 2"');
+    document.body.classList.add('fonts-loaded');
+}
+
 function init() {
     initUI();
     handleUrlGameInvite();
     initializeFirebase();
     authenticateUser();
     setupEventListeners();
+    loadFonts(); // Run the font loader
 }
 
-init();
+window.addEventListener('load', init);
 

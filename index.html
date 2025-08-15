@@ -43,7 +43,7 @@
             </svg>
         </button>
 
-        <!-- Home Screen -->
+        <!-- Home Screen (Visible by default) -->
         <div id="home-screen">
             <h1 class="title-font text-5xl sm:text-7xl font-bold mb-2 text-indigo-600">MindMeld</h1>
             <p class="text-gray-500 mb-6 sm:mb-8">The two-player game of word association.</p>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <!-- This element no longer has a fixed height (h-4) -->
+            <!-- Removed fixed height class 'h-4' -->
             <p id="home-error" class="text-red-500 mt-4 text-sm"></p>
         </div>
 
@@ -75,7 +75,8 @@
             <p class="text-gray-500 mb-4">Joining game code: <span id="invite-game-code" class="font-bold text-indigo-600"></span></p>
             <input type="text" id="invite-name-input" placeholder="Enter Your Name to Join" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition mb-4" autocomplete="off">
             <button id="invite-join-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Let's Go!</button>
-            <p id="invite-error" class="text-red-500 mt-3 h-4 text-sm"></p>
+            <!-- Removed fixed height class 'h-4' -->
+            <p id="invite-error" class="text-red-500 mt-3 text-sm"></p>
         </div>
 
         <!-- Game Screen (Container) -->
@@ -110,13 +111,12 @@
                         <div id="word2-display" class="h-14 sm:h-20 bg-indigo-100 border-2 border-dashed border-indigo-300 rounded-lg flex items-center justify-center text-lg sm:text-xl font-semibold text-indigo-800 break-words p-2">???</div>
                     </div>
                 </div>
-                <div id="submit-area">
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <input type="text" id="word-input" placeholder="Enter your word..." class="w-full sm:flex-grow px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
-                        <button id="submit-word-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Submit</button>
-                    </div>
-                    <p id="input-feedback" class="text-gray-500 mt-2 h-5 text-sm">Enter your word for this round.</p>
+                <!-- Redundant 'submit-area' div removed -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="word-input" placeholder="Enter your word..." class="w-full sm:flex-grow px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
+                    <button id="submit-word-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Submit</button>
                 </div>
+                <p id="input-feedback" class="text-gray-500 mt-2 h-5 text-sm">Enter your word for this round.</p>
             </div>
             <!-- Game Over Screen -->
             <div id="game-over-screen" class="hidden">
@@ -170,4 +170,3 @@
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
-
