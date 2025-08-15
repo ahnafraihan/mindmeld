@@ -5,26 +5,42 @@ import { UIElements, showScreen, initUI } from './ui.js';
 let gameIdFromUrl = null;
 
 function setupEventListeners() {
-    UIElements.createGameBtn.addEventListener('click', createGame);
-    
-    UIElements.joinGameBtn.addEventListener('click', () => {
-        const gameId = UIElements.joinGameIdInput.value.trim().toUpperCase();
-        if (!UIElements.playerNameInput.value.trim()) {
+    UIElements.createGameBtn.addEventListener('click', () => {
+        const playerName = UIElements.playerNameInput.value.trim();
+        if (!playerName) {
             UIElements.homeError.textContent = "Please enter your name first!";
             return;
         }
+        createGame(playerName);
+    });
+    
+    UIElements.joinGameBtn.addEventListener('click', () => {
+        const gameId = UIElements.joinGameIdInput.value.trim().toUpperCase();
+        const playerName = UIElements.playerNameInput.value.trim();
+
         if (!gameId) {
             UIElements.homeError.textContent = "Please enter a Game ID.";
             return;
         }
-        joinGame(gameId, UIElements.playerNameInput.value);
+
+        // If the player has entered a name, join directly.
+        if (playerName) {
+            joinGame(gameId, playerName);
+        } else {
+            // If no name, take them to the invite screen to enter one.
+            gameIdFromUrl = gameId;
+            showScreen('invite-screen');
+            UIElements.inviteGameCode.textContent = gameId;
+            UIElements.inviterNameDisplay.textContent = "Enter your name to join the game!";
+            UIElements.inviteNameInput.focus();
+        }
     });
 
     UIElements.inviteJoinBtn.addEventListener('click', () => {
         if (gameIdFromUrl) {
             const playerName = UIElements.inviteNameInput.value.trim();
             if (!playerName) {
-                alert("Please enter your name!");
+                UIElements.inviteError.textContent = "Please enter your name to join!";
                 return;
             }
             joinGame(gameIdFromUrl, playerName);
@@ -125,12 +141,11 @@ function handleUrlGameInvite() {
 
 function init() {
     initUI();
+    handleUrlGameInvite();
     initializeFirebase();
-    authenticateUser().then(() => {
-        handleUrlGameInvite();
-    });
+    authenticateUser();
     setupEventListeners();
 }
 
-window.addEventListener('load', init);
+init();
 
