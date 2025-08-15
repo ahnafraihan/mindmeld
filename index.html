@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full overflow-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,10 +31,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 min-h-screen p-4">
+<body class="h-full bg-gray-50 flex items-center justify-center p-4">
 
     <!-- Main Card -->
-    <div class="w-full max-w-xl text-center p-6 sm:p-8 bg-white rounded-2xl shadow-lg border-2 border-indigo-100 relative mx-auto my-8">
+    <div class="w-full max-w-xl text-center p-6 sm:p-8 bg-white rounded-2xl shadow-lg border-2 border-indigo-100 relative">
 
         <!-- How to Play Button -->
         <button id="how-to-play-btn" class="absolute top-4 right-4 text-gray-400 hover:text-indigo-600 transition-colors">
@@ -43,7 +43,7 @@
             </svg>
         </button>
 
-        <!-- Home Screen (Visible by default to prevent flash) -->
+        <!-- Home Screen -->
         <div id="home-screen">
             <h1 class="title-font text-5xl sm:text-7xl font-bold mb-2 text-indigo-600">MindMeld</h1>
             <p class="text-gray-500 mb-6 sm:mb-8">The two-player game of word association.</p>
@@ -89,7 +89,7 @@
                     </div>
                     <button id="share-game-btn" class="p-3 text-gray-500 bg-gray-100 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition-colors" title="Share invite link">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                         </svg>
                     </button>
                 </div>
@@ -97,16 +97,16 @@
             </div>
             <!-- Game Board -->
             <div id="game-board" class="hidden">
-                 <p class="text-xl text-gray-500 mb-4 sm:mb-6">Round <span id="round-display" class="font-bold text-indigo-700">1</span></p>
-                <h2 id="board-status" class="text-lg font-medium text-gray-600 mb-4 sm:mb-6 h-7">Players are thinking...</h2>
-                 <div class="flex flex-col sm:flex-row justify-around items-center sm:items-start mb-8 sm:mb-12 gap-4 sm:gap-6">
+                 <p class="text-xl text-gray-500 mb-2">Round <span id="round-display" class="font-bold text-indigo-700">1</span></p>
+                <p id="board-status" class="text-base text-gray-500 mb-10 h-6">Players are thinking...</p>
+                 <div class="flex flex-col sm:flex-row justify-around items-center sm:items-start mb-8 gap-4 sm:gap-6">
                     <div class="text-center w-full sm:w-1/2">
                          <p id="player1-name-display" class="mb-2 font-bold text-gray-800 truncate">Player 1</p>
-                        <div id="word1-display" class="h-20 bg-indigo-50 border-2 border-dashed border-indigo-200/80 rounded-lg flex items-center justify-center text-xl font-semibold text-indigo-800 break-words p-2">???</div>
+                        <div id="word1-display" class="h-20 bg-indigo-100 border-2 border-dashed border-indigo-300 rounded-lg flex items-center justify-center text-xl font-semibold text-indigo-800 break-words p-2 animate-bubble">???</div>
                     </div>
                      <div class="text-center w-full sm:w-1/2 mt-4 sm:mt-0">
                          <p id="player2-name-display" class="mb-2 font-bold text-gray-800 truncate">Player 2</p>
-                        <div id="word2-display" class="h-20 bg-indigo-50 border-2 border-dashed border-indigo-200/80 rounded-lg flex items-center justify-center text-xl font-semibold text-indigo-800 break-words p-2">???</div>
+                        <div id="word2-display" class="h-20 bg-indigo-100 border-2 border-dashed border-indigo-300 rounded-lg flex items-center justify-center text-xl font-semibold text-indigo-800 break-words p-2 animate-bubble">???</div>
                     </div>
                 </div>
                 <div id="submit-area">
@@ -143,7 +143,7 @@
                 </svg>
             </button>
             <h2 class="title-font text-4xl font-bold text-indigo-600 mb-6 text-center">How to Play</h2>
-            <div class="space-y-6 text-gray-600">
+            <div class="space-y-4 text-gray-600">
                 <div>
                     <h3 class="font-semibold text-gray-800 mb-1">The Goal:</h3>
                     <p>It's simple: guess the same word at the same time!</p>
@@ -169,4 +169,3 @@
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
-

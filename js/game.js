@@ -19,13 +19,12 @@ function normalizeWord(word) {
     return word.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
-export async function createGame() {
+export async function createGame(playerName) {
     const currentUserId = getCurrentUserId();
     if (!currentUserId) {
         UIElements.homeError.textContent = "Authenticating... Please wait a moment.";
         return;
     }
-    const playerName = UIElements.playerNameInput.value.trim() || 'Player 1';
 
     UIElements.createGameBtn.disabled = true;
     UIElements.homeError.textContent = '';
@@ -64,7 +63,7 @@ export async function joinGame(gameId, playerName) {
         return;
     }
     
-    const finalPlayerName = playerName.trim() || 'Player 2';
+    const finalPlayerName = playerName.trim();
     
     if(UIElements.joinGameBtn) UIElements.joinGameBtn.disabled = true;
     if (UIElements.inviteJoinBtn) UIElements.inviteJoinBtn.disabled = true;
@@ -204,7 +203,6 @@ function listenToGameUpdates(gameId) {
 
         if (gameData.status === 'playing' && p1.lastWord && p2.lastWord) {
              const match = normalizeWord(p1.lastWord) === normalizeWord(p2.lastWord);
-             // Shortened delay for a faster feel
              setTimeout(() => processRound(gameData), match ? 0 : 1000);
         } else if (gameData.status === 'gameover') {
             if (p1.wantsRematch && p2.wantsRematch && getCurrentUserId() === gameData.playerIds[0]) {
@@ -265,7 +263,7 @@ function updateUIWithGameState(gameData) {
             UIElements.wordInput.value = '';
         }
 
-        UIElements.boardStatus.className = "text-lg font-medium text-gray-600";
+        UIElements.boardStatus.className = "text-base text-gray-500 mb-10";
         UIElements.boardStatus.classList.remove('waiting-text-animation');
 
         if (bothSubmitted) {
@@ -275,7 +273,7 @@ function updateUIWithGameState(gameData) {
 
             if (match) {
                 UIElements.boardStatus.textContent = "Meld!";
-                UIElements.boardStatus.className = `font-bold text-lg text-teal-500`;
+                UIElements.boardStatus.className = `font-bold text-xl text-teal-500 mb-10`;
             } else {
                 UIElements.boardStatus.textContent = "Not a match! Try again.";
                 UIElements.word1Display.classList.add('shake');
