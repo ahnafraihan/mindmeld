@@ -47,14 +47,13 @@ export function initUI() {
 export { UIElements };
 
 export function showScreen(screenId) {
-    const screens = ['home-screen', 'game-screen', 'invite-screen', 'lobby', 'game-board', 'game-over-screen'];
+    const screens = ['home-screen', 'game-screen', 'invite-screen', 'lobby', 'game-board', 'gameOverScreen'];
     screens.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.add('hidden');
     });
     
-    const screenToShow = document.getElementById(screenId);
-    if (screenToShow) screenToShow.classList.remove('hidden');
+    document.getElementById(screenId)?.classList.remove('hidden');
 
     if (['lobby', 'game-board', 'game-over-screen'].includes(screenId)) {
         UIElements.gameScreen.classList.remove('hidden');
@@ -74,3 +73,4 @@ export function resetUI() {
     if (UIElements.joinGameBtn) UIElements.joinGameBtn.disabled = false;
     if (UIElements.wordInput) UIElements.wordInput.value = '';
 }
+

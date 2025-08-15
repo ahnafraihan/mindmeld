@@ -204,7 +204,8 @@ function listenToGameUpdates(gameId) {
 
         if (gameData.status === 'playing' && p1.lastWord && p2.lastWord) {
              const match = normalizeWord(p1.lastWord) === normalizeWord(p2.lastWord);
-             setTimeout(() => processRound(gameData), match ? 0 : 3000);
+             // Shortened delay for a faster feel
+             setTimeout(() => processRound(gameData), match ? 0 : 1000);
         } else if (gameData.status === 'gameover') {
             if (p1.wantsRematch && p2.wantsRematch && getCurrentUserId() === gameData.playerIds[0]) {
                 startNewGameFromRematch(gameData);
@@ -319,3 +320,4 @@ function updateUIWithGameState(gameData) {
         UIElements.wordHistory.appendChild(div);
      });
 }
+

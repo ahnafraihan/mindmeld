@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindMeld</title>
     
+    <!-- SEO & Core Metadata -->
+    <title>MindMeld - The Two-Player Word Association Game</title>
+    <meta name="description" content="The two-player game of word association. Can you and your partner guess the same word to achieve a MindMeld? Play for free online!">
+    <meta name="keywords" content="mindmeld, word association game, two player game, party game, online game">
+    <!-- TODO: Replace with your final domain name -->
+    <link rel="canonical" href="https://mindmeld.lol">
+
     <!-- Standard Favicon (for browser tabs) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text x='50' y='50' font-size='70' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'>M</text></svg>">
     
-    <!-- Meta Tags for Social Sharing & iMessage -->
-    <meta property="og:title" content="MindMeld">
-    <meta property="og:description" content="The two-player game of word association. Can you and your partner guess the same word?">
-    <link rel="apple-touch-icon" href="https://placehold.co/180x180/4f46e5/ffffff?text=M&font=sans">
+    <!-- Meta Tags for Social Sharing (Open Graph for Facebook, iMessage, etc.) -->
+    <meta property="og:title" content="MindMeld - A Game of Word Association">
+    <meta property="og:description" content="Can you and your partner guess the same word to win?">
     <meta property="og:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=MindMeld&font=sans">
-    
+    <!-- TODO: Replace with your final domain name -->
+    <meta property="og:url" content="https://your-domain-name.com">
+    <meta property="og:type" content="website">
+
+    <!-- Meta Tags for Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MindMeld - A Game of Word Association">
+    <meta name="twitter:description" content="Can you and your partner guess the same word to win?">
+    <meta name="twitter:image" content="https://placehold.co/1200x630/4f46e5/ffffff?text=MindMeld&font=sans">
+
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
@@ -33,7 +47,7 @@
             </div>
 
             <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-gray-200">
-                <button id="create-game-btn" class="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Create New Game</button>
+                <button id="create-game-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Create New Game</button>
                 <div class="flex items-center my-3 sm:my-4">
                     <div class="flex-grow h-px bg-gray-200"></div>
                     <span class="px-4 text-sm text-gray-400 font-medium">OR</span>
@@ -54,7 +68,7 @@
             <p class="text-gray-500 mb-4 sm:mb-6">Game Code: <span id="invite-game-code" class="font-bold text-indigo-600"></span></p>
             <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-gray-200">
                 <input type="text" id="invite-name-input" placeholder="Enter Your Name to Join" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition mb-3 sm:mb-4" autocomplete="off">
-                <button id="invite-join-btn" class="w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:from-teal-600 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all transform hover:-translate-y-0.5 shadow-md">Join Game</button>
+                <button id="invite-join-btn" class="w-full bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all transform hover:-translate-y-0.5 shadow-md">Join Game</button>
             </div>
         </div>
 
@@ -91,7 +105,7 @@
                 <div id="submit-area">
                     <div class="flex flex-col sm:flex-row gap-3">
                         <input type="text" id="word-input" placeholder="Enter your word..." class="w-full sm:flex-grow px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
-                        <button id="submit-word-btn" class="w-full sm:w-auto bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Submit</button>
+                        <button id="submit-word-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Submit</button>
                     </div>
                     <p id="input-feedback" class="text-gray-500 mt-2 h-5 text-sm">Enter your word for this round.</p>
                 </div>
@@ -102,7 +116,7 @@
                 <h2 id="game-over-title" class="title-font text-5xl sm:text-6xl font-bold mb-2 text-teal-500 animate-tada">MindMeld!</h2>
                 <p id="winner-names" class="text-gray-600 font-bold text-lg"></p>
                 <p id="game-over-message" class="text-gray-500 text-base mb-8"></p>
-                <button id="play-again-btn" class="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:from-indigo-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Play Again</button>
+                <button id="play-again-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Play Again</button>
             </div>
              <!-- Word History -->
             <div id="word-history-container" class="mt-4 sm:mt-8 hidden">
@@ -115,3 +129,4 @@
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
+
