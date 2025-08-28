@@ -200,7 +200,7 @@ function listenToGameUpdates(gameId) {
 
         if (gameData.nextGameId) {
             listenToGameUpdates(gameData.nextGameId);
-            return;
+            return; 
         }
 
         updateUIWithGameState(gameData);
@@ -269,8 +269,6 @@ function updateUIWithGameState(gameData) {
             UIElements.wordInput.value = '';
         }
 
-        // --- THIS IS THE FIX ---
-        // Reset styles first, then add conditional ones
         UIElements.boardStatus.classList.remove('font-bold', 'text-teal-500', 'text-red-500', 'waiting-text-animation');
         UIElements.boardStatus.classList.add('font-medium', 'text-gray-500');
 
@@ -297,7 +295,7 @@ function updateUIWithGameState(gameData) {
             UIElements.boardStatus.textContent = `${opponent.name} is ready!`;
         } else {
              UIElements.boardStatus.textContent = iHaveSubmitted ? `Waiting for ${opponent.name}...` : 'Players are thinking...';
-             UIElements.board-status.classList.add('waiting-text-animation');
+             UIElements.boardStatus.classList.add('waiting-text-animation');
         }
 
      } else if (gameData.status === 'gameover') {
