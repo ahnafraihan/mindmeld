@@ -31,113 +31,107 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+<body class="min-h-screen bg-gray-50 flex flex-col p-4">
 
-    <!-- Main Card -->
-    <div class="w-full max-w-xl text-center p-6 sm:p-8 bg-white rounded-2xl shadow-lg border-2 border-indigo-100 relative">
+    <!-- Main Content Wrapper -->
+    <div class="flex-grow flex items-center justify-center w-full">
+        <!-- Main Card -->
+        <div class="w-full max-w-xl text-center p-6 sm:p-8 bg-white rounded-2xl shadow-lg border-2 border-indigo-100 relative">
 
-        <!-- How to Play Button -->
-        <button id="how-to-play-btn" class="absolute top-4 right-4 text-gray-400 hover:text-indigo-600 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        </button>
+            <!-- How to Play Button -->
+            <button id="how-to-play-btn" class="absolute top-4 right-4 text-gray-400 hover:text-indigo-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.546-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
 
-        <!-- Home Screen (Visible by default) -->
-        <div id="home-screen">
-            <h1 class="title-font text-5xl sm:text-7xl font-bold mb-2 text-indigo-600">MindMeld</h1>
-            <p class="text-gray-500 mb-6 sm:mb-8">The two-player game of word association.</p>
-            
-            <div class="space-y-4">
-                <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-indigo-100">
-                    <input type="text" id="player-name-input" placeholder="Enter Your Name" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
+            <!-- Home Screen (Visible by default) -->
+            <div id="home-screen">
+                <h1 class="title-font text-5xl sm:text-7xl font-bold mb-2 text-indigo-600">MindMeld</h1>
+                <p class="text-gray-500 mb-6 sm:mb-8">The two-player game of word association.</p>
+                
+                <div class="space-y-4">
+                    <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-indigo-100">
+                        <input type="text" id="player-name-input" placeholder="Enter Your Name" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
+                    </div>
+                    <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-indigo-100">
+                        <button id="create-game-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Create New Game</button>
+                        <div class="flex items-center my-4">
+                            <div class="flex-grow h-px bg-gray-200"></div>
+                            <span class="px-4 text-sm text-gray-400 font-medium">OR</span>
+                            <div class="flex-grow h-px bg-gray-200"></div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input type="text" id="join-game-id-input" placeholder="Enter Game Code" class="w-full sm:flex-grow px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
+                            <button id="join-game-btn" class="w-full sm:w-auto border-2 border-indigo-500 text-indigo-600 font-bold py-3 px-6 rounded-lg hover:bg-indigo-50 hover:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Join</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-gray-50/70 p-4 rounded-lg border-2 border-indigo-100">
-                    <button id="create-game-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Create New Game</button>
-                    <div class="flex items-center my-4">
-                        <div class="flex-grow h-px bg-gray-200"></div>
-                        <span class="px-4 text-sm text-gray-400 font-medium">OR</span>
-                        <div class="flex-grow h-px bg-gray-200"></div>
+                <p id="home-error" class="text-red-500 mt-4 text-sm"></p>
+            </div>
+
+            <!-- Invite Screen -->
+            <div id="invite-screen" class="hidden">
+                <h2 id="inviter-name-display" class="text-2xl font-bold text-gray-800 mb-2">You're Invited!</h2>
+                <p class="text-gray-500 mb-4">Joining game code: <span id="invite-game-code" class="font-bold text-indigo-600"></span></p>
+                <input type="text" id="invite-name-input" placeholder="Enter Your Name to Join" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition mb-4" autocomplete="off">
+                <button id="invite-join-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Let's Go!</button>
+                <p id="invite-error" class="text-red-500 mt-3 text-sm"></p>
+            </div>
+
+            <!-- Game Screen (Container) -->
+            <div id="game-screen" class="hidden">
+                <!-- Lobby -->
+                <div id="lobby" class="hidden">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Game Lobby</h2>
+                    <p class="text-gray-500 mb-4">Share this code with your partner:</p>
+                    <div class="flex items-center justify-center gap-4">
+                        <div id="game-id-container" class="flex-grow bg-indigo-50 p-4 rounded-lg cursor-pointer border-2 border-dashed border-indigo-200 hover:border-indigo-400 transition-all" title="Click to copy code">
+                            <span id="game-id-display" class="text-2xl sm:text-3xl font-bold tracking-widest text-indigo-700"></span>
+                        </div>
+                        <button id="share-game-btn" class="p-3 text-gray-500 bg-gray-100 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition-colors" title="Share invite link">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p id="lobby-status" class="mt-4 text-gray-500">Waiting for Player 2 to join...</p>
+                </div>
+                <!-- Game Board -->
+                <div id="game-board" class="hidden">
+                     <p class="text-xl text-gray-500 mb-2">Round <span id="round-display" class="font-bold text-indigo-700">1</span></p>
+                    <p id="board-status" class="text-base text-gray-500 h-6 mb-2 md:mb-10">Players are thinking...</p>
+                     <div class="flex flex-col sm:flex-row justify-around items-center sm:items-start mb-8 gap-4 sm:gap-6">
+                        <div class="text-center w-full sm:w-1/2">
+                             <p id="player1-name-display" class="mb-2 font-bold text-gray-800 truncate">Player 1</p>
+                            <div id="word1-display" class="h-14 sm:h-20 bg-indigo-100 border-2 border-dashed border-indigo-300 rounded-lg flex items-center justify-center text-lg sm:text-xl font-semibold text-indigo-800 break-words p-2">???</div>
+                        </div>
+                         <div class="text-center w-full sm:w-1/2 mt-4 sm:mt-0">
+                             <p id="player2-name-display" class="mb-2 font-bold text-gray-800 truncate">Player 2</p>
+                            <div id="word2-display" class="h-14 sm:h-20 bg-indigo-100 border-2 border-dashed border-indigo-300 rounded-lg flex items-center justify-center text-lg sm:text-xl font-semibold text-indigo-800 break-words p-2">???</div>
+                        </div>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <input type="text" id="join-game-id-input" placeholder="Enter Game Code" class="w-full sm:flex-grow px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
-                        <button id="join-game-btn" class="w-full sm:w-auto border-2 border-indigo-500 text-indigo-600 font-bold py-3 px-6 rounded-lg hover:bg-indigo-50 hover:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">Join</button>
+                        <input type="text" id="word-input" placeholder="Enter your word..." class="w-full sm:flex-grow px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
+                        <button id="submit-word-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Submit</button>
                     </div>
+                    <p id="input-feedback" class="text-gray-500 mt-2 h-5 text-sm">Enter your word for this round.</p>
                 </div>
-            </div>
-            <!-- Removed fixed height class 'h-4' -->
-            <p id="home-error" class="text-red-500 mt-4 text-sm"></p>
-        </div>
-
-        <!-- Invite Screen -->
-        <div id="invite-screen" class="hidden">
-            <h2 id="inviter-name-display" class="text-2xl font-bold text-gray-800 mb-2">You're Invited!</h2>
-            <p class="text-gray-500 mb-4">Joining game code: <span id="invite-game-code" class="font-bold text-indigo-600"></span></p>
-            <input type="text" id="invite-name-input" placeholder="Enter Your Name to Join" class="w-full text-center px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition mb-4" autocomplete="off">
-            <button id="invite-join-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Let's Go!</button>
-            <!-- Removed fixed height class 'h-4' -->
-            <p id="invite-error" class="text-red-500 mt-3 text-sm"></p>
-        </div>
-
-        <!-- Game Screen (Container) -->
-        <div id="game-screen" class="hidden">
-            <!-- Lobby -->
-            <div id="lobby" class="hidden">
-                <h2 class="text-xl font-semibold text-gray-800 mb-2">Game Lobby</h2>
-                <p class="text-gray-500 mb-4">Share this code with your partner:</p>
-                <div class="flex items-center justify-center gap-4">
-                    <div id="game-id-container" class="flex-grow bg-indigo-50 p-4 rounded-lg cursor-pointer border-2 border-dashed border-indigo-200 hover:border-indigo-400 transition-all" title="Click to copy code">
-                        <span id="game-id-display" class="text-2xl sm:text-3xl font-bold tracking-widest text-indigo-700"></span>
+                <!-- Game Over Screen -->
+                <div id="game-over-screen" class="hidden">
+                    <h2 id="game-over-title" class="title-font text-5xl font-bold mb-2 text-teal-500 animate-tada">MindMeld!</h2>
+                    <p id="winner-names" class="text-lg font-bold text-gray-800"></p>
+                    <p id="game-over-message" class="text-gray-600 mt-2 mb-8">You both guessed 'word'!</p>
+                    <button id="play-again-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Play Again</button>
+                </div>
+                 <!-- Word History Container -->
+                <div id="word-history-container" class="mt-8 hidden">
+                    <h3 class="font-bold text-center text-gray-700 mb-2">Round History</h3>
+                    <div id="word-history" class="space-y-2 max-h-40 overflow-y-auto pr-2">
                     </div>
-                    <button id="share-game-btn" class="p-3 text-gray-500 bg-gray-100 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition-colors" title="Share invite link">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                        </svg>
-                    </button>
-                </div>
-                <p id="lobby-status" class="mt-4 text-gray-500">Waiting for Player 2 to join...</p>
-            </div>
-            <!-- Game Board -->
-            <div id="game-board" class="hidden">
-                 <p class="text-xl text-gray-500 mb-2">Round <span id="round-display" class="font-bold text-indigo-700">1</span></p>
-                <p id="board-status" class="text-base text-gray-500 h-6 mb-2 md:mb-10">Players are thinking...</p>
-                 <div class="flex flex-col sm:flex-row justify-around items-center sm:items-start mb-8 gap-4 sm:gap-6">
-                    <div class="text-center w-full sm:w-1/2">
-                         <p id="player1-name-display" class="mb-2 font-bold text-gray-800 truncate">Player 1</p>
-                        <div id="word1-display" class="h-14 sm:h-20 bg-indigo-100 border-2 border-dashed border-indigo-300 rounded-lg flex items-center justify-center text-lg sm:text-xl font-semibold text-indigo-800 break-words p-2">???</div>
-                    </div>
-                     <div class="text-center w-full sm:w-1/2 mt-4 sm:mt-0">
-                         <p id="player2-name-display" class="mb-2 font-bold text-gray-800 truncate">Player 2</p>
-                        <div id="word2-display" class="h-14 sm:h-20 bg-indigo-100 border-2 border-dashed border-indigo-300 rounded-lg flex items-center justify-center text-lg sm:text-xl font-semibold text-indigo-800 break-words p-2">???</div>
-                    </div>
-                </div>
-                <!-- Redundant 'submit-area' div removed -->
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="word-input" placeholder="Enter your word..." class="w-full sm:flex-grow px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" autocomplete="off">
-                    <button id="submit-word-btn" class="w-full sm:w-auto bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Submit</button>
-                </div>
-                <p id="input-feedback" class="text-gray-500 mt-2 h-5 text-sm">Enter your word for this round.</p>
-            </div>
-            <!-- Game Over Screen -->
-            <div id="game-over-screen" class="hidden">
-                <h2 id="game-over-title" class="title-font text-5xl font-bold mb-2 text-teal-500 animate-tada">MindMeld!</h2>
-                <p id="winner-names" class="text-lg font-bold text-gray-800"></p>
-                <p id="game-over-message" class="text-gray-600 mt-2 mb-8">You both guessed 'word'!</p>
-                <button id="play-again-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:-translate-y-0.5 shadow-md">Play Again</button>
-            </div>
-             <!-- Word History Container -->
-            <div id="word-history-container" class="mt-8 hidden">
-                <h3 class="font-bold text-center text-gray-700 mb-2">Round History</h3>
-                <div id="word-history" class="space-y-2 max-h-40 overflow-y-auto pr-2">
-                    <!-- History will be populated here -->
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- This is the new footer, outside the main card -->
-    <div class="fixed bottom-4 right-4 text-xs text-gray-400">
-        made with 🧩 by ahnaf
     </div>
 
     <!-- How to Play Modal -->
@@ -171,6 +165,10 @@
         </div>
     </div>
     
+    <footer class="text-center text-xs text-gray-400 mt-4">
+        made with 🧩 by ahnaf
+    </footer>
+
     <!-- Main Script -->
     <script type="module" src="js/main.js"></script>
 </body>
